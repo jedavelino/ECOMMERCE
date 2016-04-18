@@ -50,3 +50,17 @@ body {
 	top: 400px;
 	left: -25px;
 }
+
+.img-thumb {
+	width: auto;
+	height: 200px;
+}
+
+#footer {
+	margin-top: 50px;
+}
+
+.details {
+	width: 33%;
+	margin: 15px auto;
+}
