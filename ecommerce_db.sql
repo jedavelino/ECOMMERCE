@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.2
+-- version 4.5.1
 -- http://www.phpmyadmin.net
 --
--- Host: localhost
--- Generation Time: Apr 19, 2016 at 12:29 AM
+-- Host: 127.0.0.1
+-- Generation Time: May 29, 2016 at 03:42 PM
 -- Server version: 10.1.10-MariaDB
--- PHP Version: 5.6.19
+-- PHP Version: 5.6.15
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -17,7 +17,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `ecommerce`
+-- Database: `ecommerce_db`
 --
 
 -- --------------------------------------------------------
@@ -97,7 +97,8 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `title`, `price`, `list_price`, `brand`, `categories`, `image`, `description`, `featured`, `sizes`) VALUES
-(1, 'Levis Jeans', '29.99', '39.99', 1, '6', '/ecommerce/images/products/men4.png', 'These jeans are amazing. They are super comfy and sexy! Buy them.', 1, '28:3,32:5,36:1');
+(1, 'Levis Jeans', '29.99', '39.99', 1, '6', '/ecommerce/images/products/men4.png', 'These jeans are amazing. They are super comfy and sexy! Buy them.', 1, '28:3,32:5,36:1'),
+(2, 'Beautiful Shirt', '19.99', '24.99', 1, '5', '/ecommerce/images/products/men1.png', 'What a beautiful blue colored polo-shirt.', 1, 'Small:3,Medium:6,Large:9');
 
 --
 -- Indexes for dumped tables
@@ -139,7 +140,7 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
