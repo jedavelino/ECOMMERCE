@@ -27,7 +27,7 @@
 			var data = {"id" : id};
 			// send data to detailsmodal.php
 			jQuery.ajax({
-				url		: <?php echo BASEURL; ?>+'includes/detailsmodal.php',
+				url		: '/ecommerce/includes/detailsmodal.php',
 				method	: "post",
 				data	: data,
 				success	: function(data){
