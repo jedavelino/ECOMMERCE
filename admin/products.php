@@ -4,8 +4,25 @@
 	include 'includes/navigation.php';
 
 	if(isset($_GET['add'])) {
-	$brandQuery = $db->query("SELECT * FROM brand ORDER BY brand");
-	$parentQuery = $db->query("SELECT * FROM categories WHERE parent = 0 ORDER BY category");
+		$brandQuery = $db->query("SELECT * FROM brand ORDER BY brand");
+		$parentQuery = $db->query("SELECT * FROM categories WHERE parent = 0 ORDER BY category");
+
+		if($_POST) {
+			if(!empty($_POST['sizes'])) {
+				$sizeString = sanitize($_POST['sizes']);
+				$sizeString = rtrim($sizeString, ',');
+				$sizesArray = explode(',', $sizeString);
+				$sArray = array();
+				$qArray = array();
+				foreach($sizesArray as $ss) {
+					$s = explode(':', $ss);
+					$sArray = $s[0];
+					$qArray = $s[1];
+				}
+			} else {
+				$sizesArray = array();
+			}
+		}
 ?>
 
 
@@ -64,11 +81,42 @@
 		<label for="description">Description</label>
 		<textarea class="form-control" name="description" id="description" rows="6"><?php echo ((isset($_POST['description']))?sanitize($_POST['description']) : ''); ?></textarea>
 	</div>
-	<div class="form-group col-md-2 pull-right">
+	<div class="form-group col-md-1 pull-right">
 		<input class="form-control btn btn-success pull-right" type="submit" value="Add Product">
 	</div>
 	<div class="clearfix"></div>
 </form>
+
+
+<!-- Modal -->
+<div class="modal fade" id="sizesModal" tabindex="-1" role="dialog" aria-labelledby="sizesModalLabel">
+	<div class="modal-dialog modal-lg" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="sizesModalLabel">Size &amp; Quantity</h4>
+			</div>
+			<div class="modal-body">
+				<div class="container-fluid">
+					<?php for($i = 1; $i <= 12; $i++) : ?>
+					<div class="form-group col-md-4">
+						<label for="size<?php echo $i; ?>">Size:</label>
+						<input class="form-control" type="text" name="size<?php echo $i; ?>" id="size<?php echo $i; ?>" value="<?php echo ((!empty($sArray[$i-1]))?$sArray[$i-1] : ''); ?>">
+					</div>
+					<div class="form-group col-md-2">
+						<label for="qty<?php echo $i; ?>">Size:</label>
+						<input class="form-control" type="number" name="qty<?php echo $i; ?>" id="qty<?php echo $i; ?>" value="<?php echo ((!empty($qArray[$i-1]))?$qArray[$i-1] : ''); ?>" min="0">
+					</div>
+					<?php endfor; ?>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-primary" onclick="updateSizes();jQuery('#sizesModal').modal('toggle');return false;">Save changes</button>
+			</div>
+		</div>
+	</div>
+</div>
 
 
 <?php
