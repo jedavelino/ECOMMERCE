@@ -1,6 +1,6 @@
 <!-- Navbar -->
 <nav class="navbar navbar-default navbar-fixed-top">
-	<div class="container">
+	<div class="container-fluid">
 		<div class="navbar-header">
 			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#top-navbar" aria-expanded="false">
 				<span class="sr-only">Toggle navigation</span>
@@ -16,6 +16,7 @@
 				
 				<li><a href="brands.php">Brands</a></li>
 				<li><a href="categories.php">Categories</a></li>
+				<li><a href="products.php">Products</a></li>
 				<!-- <li class="dropdown">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><?php echo $parent['category']; ?> <span class="caret"></span></a>
 					<ul class="dropdown-menu">
