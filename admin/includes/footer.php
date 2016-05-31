@@ -5,5 +5,23 @@
 	&copy; Copyright 2016 Shaunta's Boutique
 </footer>
 
+<script>
+	function get_child_options() {
+		var parentID = jQuery('#parent').val();
+		jQuery.ajax({
+			url: '/ecommerce/admin/parsers/child_categories.php',
+			type: 'post',
+			data: {parentID : parentID},
+			success: function(data) {
+				jQuery('#child').html(data);
+			},
+			error: function() {
+				alert("Something went wrong with the child options!");
+			},
+		});
+	}
+	jQuery('select[name="parent"]').change(get_child_options);
+</script>
+
 </body>
 </html>
