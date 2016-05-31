@@ -5,6 +5,24 @@
 
 	$errors = array();
 
+	// Delete
+	if(isset($_GET['delete']) && !empty($_GET['delete'])) {
+		$delete_id = (int)$_GET['delete'];
+		$delete_id = sanitize($delete_id);
+
+		// Deleting a parent and its children to avoid orphaned categories.
+		$result = $db->query("SELECT * FROM categories WHERE id = '{$delete_id}'");
+		$category = mysqli_fetch_assoc($result);
+		if($category['parent'] == 0) {
+			$db->query("DELETE FROM categories WHERE parent = '{$delete_id}'");
+			header("Location: categories.php");
+		}
+
+		// Deleting a child only.
+		$db->query("DELETE FROM categories WHERE id = '{$delete_id}'");
+		header("Location: categories.php");
+	}
+
 	// Process form
 	if(isset($_POST) && !empty($_POST)) {
 		$parent = sanitize($_POST['parent']);

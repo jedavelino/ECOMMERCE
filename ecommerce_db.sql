@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: May 31, 2016 at 05:20 AM
+-- Generation Time: May 31, 2016 at 05:50 AM
 -- Server version: 10.1.10-MariaDB
 -- PHP Version: 5.6.15
 
@@ -75,8 +75,8 @@ INSERT INTO `categories` (`id`, `category`, `parent`) VALUES
 (15, 'Dresses', 4),
 (16, 'Shoes', 4),
 (17, 'Accessories', 2),
-(18, 'Gifts', 0),
-(19, 'Home Decor', 18);
+(24, 'Gifts', 0),
+(25, 'Home Decor', 24);
 
 -- --------------------------------------------------------
 
@@ -140,7 +140,7 @@ ALTER TABLE `brand`
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 --
 -- AUTO_INCREMENT for table `products`
 --
