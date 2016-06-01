@@ -8,6 +8,16 @@
 		$parentQuery = $db->query("SELECT * FROM categories WHERE parent = 0 ORDER BY category");
 
 		if($_POST) {
+			$title = sanitize($_POST['title']);
+			$brand = sanitize($_POST['brand']);
+			$categories = sanitize($_POST['child']);
+			$price = sanitize($_POST['price']);
+			$list_price = sanitize($_POST['list_price']);
+			$sizes = sanitize($_POST['sizes']);
+			$description = sanitize($_POST['description']);
+			$dbpath = '';
+
+			$errors = array();
 			if(!empty($_POST['sizes'])) {
 				$sizeString = sanitize($_POST['sizes']);
 				$sizeString = rtrim($sizeString, ',');
@@ -21,6 +31,55 @@
 				}
 			} else {
 				$sizesArray = array();
+			}
+			
+			$required = array('title', 'brand', 'price', 'parent', 'child', 'sizes');
+			foreach($required as $field) {
+				if($_POST[$field] == '') {
+					$errors[] = 'All fields with an anterisk are required!';
+					break;
+				}
+			}
+
+			if(!empty($_FILES)) {
+				var_dump($_FILES);
+				$photo = $_FILES['photo'];
+				$name = $photo['name'];
+				$nameArray = explode('.', $name);
+				$fileName = $nameArray[0];
+				$fileExt = $nameArray[1];
+				$mime = explode('/', $photo['type']);
+				$mimeType = $mime[0];
+				$mimeExt = $mime[1];
+				$tmpLoc = $photo['tmp_name'];
+				$fileSize = $photo['size'];
+
+				$allowed = array('png', 'jpg', 'jpeg', 'gif');
+				$uploadName = md5(microtime()).'.'.$fileExt;
+				$uploadPath = BASEURL.'images/products/'.$uploadName;
+				$dbpath = '/ecommerce/images/products/'.$uploadName;
+				if($mimeType != 'image') {
+					$errors[] .= 'The file must be an image.';
+				}
+				if(!in_array($fileExt, $allowed)) {
+					$errors[] .= 'The file extension must be a png, jpg, jpeg, or gif.';
+				}
+				if($fileSize > 15000000) {
+					$errors[] .= 'The file size must be under 15 megabytes.';
+				}
+				if($fileExt != $mimeExt && ($mimeExt == 'jpeg' && $fileExt != 'jpg')) {
+					$errors[] .= 'File extension does not match the file.';
+				}
+			}
+			
+			if(!empty($errors)) {
+				echo display_errors($errors);
+			} else {
+				/* Upload file and insert into database. */
+				move_uploaded_file($tmpLoc, $uploadPath);
+				$insertSql = "INSERT INTO products (title, price, list_price, brand, categories, image, description, sizes) VALUES ('{$title}', '{$price}', '{$list_price}', '{$brand}', '{$categories}', '{$dbpath}', '{$description}', '{$sizes}')";
+				$db->query($insertSql);
+				header("Location: products.php");
 			}
 		}
 ?>
@@ -62,7 +121,7 @@
 		<input class="form-control" type="text" name="price" id="price" value="<?php echo ((isset($_POST['price']))?$_POST['price'] : ''); ?>">
 	</div>
 	<div class="form-group col-md-3">
-		<label for="list_price">List Price*:</label>
+		<label for="list_price">List Price:</label>
 		<input class="form-control" type="text" name="list_price" id="list_price" value="<?php echo ((isset($_POST['list_price']))?sanitize($_POST['list_price']) : ''); ?>">
 	</div>
 	<div class="form-group col-md-3">

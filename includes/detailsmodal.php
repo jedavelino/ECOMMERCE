@@ -8,6 +8,7 @@
 	$brand_query = $db->query("SELECT brand FROM brand WHERE id = '$brand_id'");
 	$brand = mysqli_fetch_assoc($brand_query);
 	$sizestring = $product['sizes'];
+	$sizestring = rtrim($sizestring, ',');
 	$size_array = explode(',', $sizestring);
 ?>
 
@@ -34,7 +35,7 @@
 
 						<div class="col-sm-6">
 							<h4>Details</h4>
-							<p><?php echo $product['description']; ?></p>
+							<p><?php echo nl2br($product['description']); ?></p>
 							<hr>
 							<p>Price: $<?php echo $product['price']; ?></p>
 							<p>Brand: <?php echo $brand['brand']; ?></p>

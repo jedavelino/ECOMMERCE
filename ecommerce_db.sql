@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: May 31, 2016 at 12:00 PM
+-- Generation Time: Jun 01, 2016 at 02:45 AM
 -- Server version: 5.6.24
 -- PHP Version: 5.6.8
 
@@ -98,15 +98,16 @@ CREATE TABLE IF NOT EXISTS `products` (
   `featured` tinyint(4) NOT NULL DEFAULT '0',
   `sizes` text COLLATE utf8_unicode_ci NOT NULL,
   `deleted` tinyint(4) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `products`
 --
 
 INSERT INTO `products` (`id`, `title`, `price`, `list_price`, `brand`, `categories`, `image`, `description`, `featured`, `sizes`, `deleted`) VALUES
-(1, 'Levis Jeans', '29.99', '39.99', 1, '6', '/ecommerce/images/products/men4.png', 'These jeans are amazing. They are super comfy and sexy! Buy them.', 0, '28:3,32:5,36:1', 0),
-(2, 'Beautiful Shirt', '19.99', '24.99', 1, '5', '/ecommerce/images/products/men1.png', 'What a beautiful blue colored polo-shirt.', 0, 'Small:3,Medium:6,Large:9', 0);
+(1, 'Levis Jeans', '29.99', '39.99', 1, '6', '/ecommerce/images/products/men4.png', 'These jeans are amazing. They are super comfy and sexy! Buy them.', 1, '28:3,32:5,36:1', 0),
+(2, 'Beautiful Shirt', '19.99', '24.99', 1, '5', '/ecommerce/images/products/men1.png', 'What a beautiful blue colored polo-shirt.', 1, 'Small:3,Medium:6,Large:9', 0),
+(3, 'Generic Shirt', '20.00', '15.00', 3, '13', '/ecommerce/images/products/fbc3afb68d2b1f3203f3c1056879d2d5.png', 'This is a generic polo shirt for boys.', 1, 'Small:2,Medium:4,Large:6,', 0);
 
 --
 -- Indexes for dumped tables
@@ -148,7 +149,7 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
